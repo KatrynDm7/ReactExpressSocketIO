@@ -1,0 +1,48 @@
+body {
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+    color: #00B7FF;
+}
+
+textarea {
+    resize: none;
+    overflow: auto;
+}
+
+input[type="text"] {
+    width: 170px;
+    height: 25px;
+    font-size: 15px;
+    margin: 0 10px 0 0;
+    float: left;
+}
+
+input[type="button"] {
+    width: 150px;
+    height: 34px;
+    display: block;
+    font-size: 15px;
+}
+
+.content {
+    width: 700px;
+    display: block;
+    margin: 0 auto;
+}
+
+#chat-window {
+    width: 700px;
+    height: 250px;
+}
+
+#chat-form {
+    margin: 10px 0 0 0;
+}
+
+.add textarea {
+    width: 510px;
+    height: 150px;
+}

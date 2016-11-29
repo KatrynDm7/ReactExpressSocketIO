@@ -11,14 +11,11 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
-                loaders: ['babel-loader?presets[]=react,presets[]=es2015'],
+                loaders: ['babel-loader?presets[]=react'],
             }
         ],
         preLoaders: [
             { test: /\.json$/, loaders: ['json-loader'] }
         ]
     },
-    node: {
-      fs: "empty"
-    }
 };

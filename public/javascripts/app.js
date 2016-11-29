@@ -26,7 +26,7 @@ var ChatComponent = React.createClass({
         this._socketOnSendMessage();
     },
     _listenSocket() {
-        return io(HOST + ':' + PORT);
+        return io(HOST);
     },
     _socketOnSendMessage() {
         const socket = this._listenSocket();

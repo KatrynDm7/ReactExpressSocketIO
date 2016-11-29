@@ -89,7 +89,7 @@
 	        this._socketOnSendMessage();
 	    },
 	    _listenSocket: function _listenSocket() {
-	        return io(HOST + ':' + PORT);
+	        return io(HOST);
 	    },
 	    _socketOnSendMessage: function _socketOnSendMessage() {
 	        var socket = this._listenSocket();

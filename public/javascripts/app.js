@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {analyze as Analyze} from '../../bot/comporator/index';
-const HOST = 'http://127.0.0.1';
+const HOST = 'https://sirinesiri.herokuapp.com';
 const PORT = 3000;
 
 var Main = React.createClass({

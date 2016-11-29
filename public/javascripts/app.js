@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {analyze as Analyze} from '../../bot/comporator/index';
+const HOST = 'http://127.0.0.1';
+const PORT = 3000;
 
 var Main = React.createClass({
     render: function() {
@@ -14,36 +17,44 @@ var Main = React.createClass({
 var ChatComponent = React.createClass({
     getInitialState: function() {
         return {
-            usernameIsEmpty: true,
             messageIsEmpty: true
         };
     },
     componentDidMount: function() {
-        ReactDOM.findDOMNode(this.refs.username).focus();
-
+        ReactDOM.findDOMNode(this.refs.message).focus();
         this._listenSocket();
-
+        this._socketOnSendMessage();
     },
     _listenSocket() {
-        const socket = io("http://127.0.0.1:3000");
+        return io(HOST + ':' + PORT);
+    },
+    _socketOnSendMessage() {
+        const socket = this._listenSocket();
         socket.on('send message', this._addMessage);
     },
+    _socketEmitSendMessage(message) {
+        if (typeof message !== 'undefined') {
+            const socket = this._listenSocket();
+            socket.emit('send message', message);
+        }
+    },
     _addMessage(data) {
-         var chatWindow = document.getElementById('chat-window')
-         chatWindow.innerHTML += data;
+         var chatWindow = document.getElementById('chat-window');
+         chatWindow.innerHTML += 'You: ' + data + '\n';
 
+         var message = ReactDOM.findDOMNode(this.refs.message).value || '';
+         chatWindow.innerHTML += 'SiriNeSiri: ' + Analyze(message) + '\n';
+
+         this._afterBtnClicked();
     },
     onButtonClick: function(e) {
         e.preventDefault();
-        var username = ReactDOM.findDOMNode(this.refs.username).value;
         var message = ReactDOM.findDOMNode(this.refs.message).value;
-
-        const socket = io("http://127.0.0.1:3000");
-        socket.emit('send message', username + ': ' +message + '\n');
-
-        username = '';
-        message = '';
+        this._socketEmitSendMessage(message);
         return false;
+    },
+    _afterBtnClicked() {
+        ReactDOM.findDOMNode(this.refs.message).value = '';
     },
     onFieldChange: function(fieldName, e) {
         if (e.target.value.trim().length > 0) {
@@ -54,15 +65,13 @@ var ChatComponent = React.createClass({
         }
     },
     render: function() {
-        var usernameIsEmpty = this.state.usernameIsEmpty;
         var messageIsEmpty = this.state.messageIsEmpty;
 
         return (
             <div className="chatComponent">
                 <form className='add'>
-                    <input type='text' ref='username' placeholder='Username' onChange={this.onFieldChange.bind(this, 'usernameIsEmpty')}/>
                     <textarea ref='message' placeholder='Message' onChange={this.onFieldChange.bind(this, 'messageIsEmpty')}></textarea>
-                    <input onClick={this.onButtonClick} ref='sendButton' value='Send' type='button' disabled={usernameIsEmpty || messageIsEmpty} />
+                    <input onClick={this.onButtonClick} ref='sendButton' value='Send' type='button' disabled={messageIsEmpty} />
                 </form>
             </div>
         )

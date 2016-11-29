@@ -13,6 +13,12 @@ module.exports = {
                 exclude: /node_modules/,
                 loaders: ['babel-loader?presets[]=react,presets[]=es2015'],
             }
+        ],
+        preLoaders: [
+            { test: /\.json$/, loaders: ['json-loader'] }
         ]
+    },
+    node: {
+      fs: "empty"
     }
 };

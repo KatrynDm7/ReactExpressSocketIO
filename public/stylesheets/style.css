@@ -33,9 +33,14 @@ input[type="button"] {
     margin: 0 auto;
 }
 
+#answer-window {
+    width: 550px;
+    height: 100px;
+}
+
 #chat-window {
-    width: 700px;
-    height: 250px;
+    width: 550px;
+    height: 100px;
 }
 
 #chat-form {
@@ -43,6 +48,6 @@ input[type="button"] {
 }
 
 .add textarea {
-    width: 510px;
-    height: 150px;
+    width: 367px;
+    height: 100px;
 }

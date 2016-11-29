@@ -6,6 +6,7 @@ import favicon from 'serve-favicon';
 import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
+import fs from 'fs';
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -26,6 +27,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+
+fs.writeFile('message.txt', 'Hello Node.js', (err) => {
+  if (err) throw err;
+  console.log('It\'s saved!');
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
